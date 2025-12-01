@@ -1,7 +1,84 @@
+# ───────────────────────────────────────────
+# Core Dependencies
+# ───────────────────────────────────────────
 node_modules/
+
+# Vite build output
 dist/
+build/
+
+# Local environment
 .env
-.DS_Storexxnode_modules/
-dist/
-.env
+.env.*
+!.env.example
+
+# ───────────────────────────────────────────
+# Logs & Debugging Artifacts
+# ───────────────────────────────────────────
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vite server logs
+vite-error.log
+vite-debug.log
+
+# ───────────────────────────────────────────
+# OS-Specific Junk
+# ───────────────────────────────────────────
 .DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ───────────────────────────────────────────
+# Editor & Tooling Noise
+# ───────────────────────────────────────────
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+.idea/
+*.iml
+
+# Temporary editor files
+*.swp
+*.swo
+
+# ───────────────────────────────────────────
+# Build Tools / Caches
+# ───────────────────────────────────────────
+**/.cache/
+.cache/
+.vite/
+vite.config.ts.timestamp-*
+vite.config.js.timestamp-*
+
+# Babel / ESLint / Prettier caches
+.babelrc.cjs
+eslintcache/
+.eslintcache
+.prettier-cache
+
+# TypeScript clutter
+*.tsbuildinfo
+
+# ───────────────────────────────────────────
+# Testing
+# ───────────────────────────────────────────
+coverage/
+*.lcov
+
+# ───────────────────────────────────────────
+# Storybook (if ever added)
+# ───────────────────────────────────────────
+storybook-static/
+
+# ───────────────────────────────────────────
+# Generated Assets
+# ───────────────────────────────────────────
+*.log
+*.map
+*.local
