@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { EducationItem } from '../types.ts';
-import Card from './common/Card.tsx';
 
 interface EducationProps {
     item: EducationItem;
@@ -9,20 +8,27 @@ interface EducationProps {
 
 const Education: React.FC<EducationProps> = ({ item }) => {
     return (
-        <ol className="group/list">
-            <Card>
-                <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2" aria-label={String(item.year)}>
-                    {item.year}
-                </header>
-                <div className="z-10 sm:col-span-6">
-                    <h3 className="font-medium leading-snug text-slate-200">
-                        <span className="font-bold">{item.degree}</span>
-                    </h3>
-                    <p className="mt-1 text-sm text-slate-400">{item.university}</p>
-                    <p className="mt-1 text-sm text-slate-500">Grade: {item.grade}</p>
+        <div className="bg-slate-800/30 border border-slate-700/50 rounded-2xl p-6 hover:-translate-y-1 hover:border-accent/30 transition-all duration-300 max-w-2xl">
+            <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center">
+                    <span className="text-3xl">🎓</span>
                 </div>
-            </Card>
-        </ol>
+                <div className="flex-1">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                        <h3 className="text-lg font-bold text-slate-200">{item.degree}</h3>
+                        <span className="inline-flex items-center px-3 py-1 rounded-full bg-slate-700/50 text-xs font-mono text-slate-400">
+                            {item.year}
+                        </span>
+                    </div>
+                    <p className="mt-2 text-slate-400">{item.university}</p>
+                    <div className="mt-3 flex items-center gap-2">
+                        <span className="inline-flex items-center px-3 py-1 rounded-lg bg-accent/10 border border-accent/20 text-sm font-semibold text-accent">
+                            Grade: {item.grade}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

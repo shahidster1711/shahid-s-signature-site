@@ -1,8 +1,7 @@
 
 import React from 'react';
 import { ProjectItem } from '../types.ts';
-import ExternalLinkIcon from './icons/ExternalLinkIcon.tsx';
-import Card from './common/Card.tsx';
+import GitHubIcon from './icons/GitHubIcon.tsx';
 
 interface ProjectsProps {
     items: ProjectItem[];
@@ -10,37 +9,56 @@ interface ProjectsProps {
 
 const Projects: React.FC<ProjectsProps> = ({ items }) => {
     return (
-        <ul className="group/list">
+        <div className="grid md:grid-cols-2 gap-6">
             {items.map((item, index) => (
-                <Card key={index}>
-                    <div className="z-10 sm:col-span-8">
-                        <h3 className="font-medium leading-snug text-slate-200">
+                <div 
+                    key={index}
+                    className="group bg-slate-800/30 border border-slate-700/50 rounded-2xl p-6 hover:-translate-y-1 hover:border-accent/30 transition-all duration-300 flex flex-col"
+                >
+                    {/* Header */}
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                                </svg>
+                            </div>
+                            <h3 className="font-bold text-slate-200 group-hover:text-accent transition-colors">
+                                {item.name}
+                            </h3>
+                        </div>
+                        {item.url && (
                             <a
-                                className="group/link inline-flex items-baseline font-bold text-base hover:text-fuchsia-400 focus-visible:text-fuchsia-400 focus:outline-none focus-visible:ring-1 focus-visible:ring-fuchsia-400 rounded-sm"
                                 href={item.url}
                                 target="_blank"
                                 rel="noreferrer noopener"
-                                aria-label={`${item.name} (opens in a new tab)`}
+                                className="p-2 rounded-lg bg-slate-700/50 text-slate-400 hover:text-accent hover:bg-accent/10 transition-all"
+                                aria-label={`View ${item.name} on GitHub`}
                             >
-                                <span className="absolute -inset-x-4 -inset-y-2.5 hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block"></span>
-                                <span>
-                                    {item.name}
-                                    {item.url && <ExternalLinkIcon className="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px" />}
-                                </span>
+                                <GitHubIcon className="w-5 h-5" />
                             </a>
-                        </h3>
-                        <p className="mt-2 text-sm leading-normal text-slate-400">{item.description}</p>
-                        <ul className="mt-2 flex flex-wrap" aria-label="Technologies used">
-                            {item.tags.map((tag, i) => (
-                                <li key={i} className="mr-1.5 mt-2">
-                                    <div className="flex items-center rounded-full bg-fuchsia-400/10 px-3 py-1 text-xs font-medium leading-5 text-fuchsia-300 ">{tag}</div>
-                                </li>
-                            ))}
-                        </ul>
+                        )}
                     </div>
-                </Card>
+                    
+                    {/* Description */}
+                    <p className="text-sm text-slate-400 leading-relaxed flex-grow">
+                        {item.description}
+                    </p>
+                    
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-700/50">
+                        {item.tags.map((tag, i) => (
+                            <span 
+                                key={i} 
+                                className="inline-flex items-center rounded-md bg-slate-700/50 px-2.5 py-1 text-xs font-medium text-slate-300"
+                            >
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                </div>
             ))}
-        </ul>
+        </div>
     );
 };
 

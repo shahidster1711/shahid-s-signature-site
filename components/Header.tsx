@@ -16,28 +16,39 @@ const navItems = [
 
 const Header: React.FC<HeaderProps> = ({ activeSection }) => {
     return (
-        <header className="flex items-center justify-between py-4 px-6 md:px-12 lg:px-24 sticky top-0 z-30 bg-slate-950/50 backdrop-blur-sm border-b border-slate-800">
-            <a href="#" className="flex items-center gap-2 text-xl font-bold text-slate-200 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 rounded-md">
-                <DatabaseIcon className="w-7 h-7 text-fuchsia-400" />
-                <span>Shahid.cloud</span>
+        <header className="flex items-center justify-between py-4 px-6 md:px-12 lg:px-24 sticky top-0 z-30 bg-dark/80 backdrop-blur-md border-b border-slate-800/50">
+            <a href="#" className="flex items-center gap-2 text-xl font-bold text-slate-200 hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded-md group">
+                <DatabaseIcon className="w-7 h-7 text-accent transition-transform group-hover:scale-110" />
+                <span className="font-mono tracking-tight">shahid<span className="text-accent">.cloud</span></span>
             </a>
-            <nav className="hidden md:flex items-center gap-1 bg-slate-800/50 border border-slate-700 rounded-lg p-1">
+            <nav className="hidden md:flex items-center gap-1 bg-slate-800/30 border border-slate-700/50 rounded-xl p-1">
                 {navItems.map((item) => (
                     <a 
                         key={item.name}
                         href={`#${item.id}`}
-                        className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 ${activeSection === item.id ? 'bg-slate-700 text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white'}`}
+                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 ${
+                            activeSection === item.id 
+                                ? 'bg-accent/10 text-accent border border-accent/20' 
+                                : 'text-slate-400 hover:text-white hover:bg-slate-700/50'
+                        }`}
                     >
                         {item.name}
                     </a>
                 ))}
-                 <a 
+                <a 
                     href="mailto:connect2shahidmoosa@gmail.com"
-                    className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors text-slate-400 hover:bg-slate-800 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500"
+                    className="ml-2 px-4 py-2 rounded-lg text-sm font-medium bg-gradient-to-r from-accent to-cyan-500 text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
                 >
                     Contact
                 </a>
             </nav>
+            
+            {/* Mobile menu button */}
+            <button className="md:hidden p-2 rounded-lg bg-slate-800/50 border border-slate-700 text-slate-400 hover:text-white">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
         </header>
     );
 };
