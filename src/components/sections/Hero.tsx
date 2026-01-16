@@ -3,6 +3,10 @@ import { ArrowDown, Github, Linkedin, Mail, FileDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LiveTerminal } from "@/components/ui/LiveTerminal";
 import shahidPhoto from "@/assets/shahid-moosa.jpg";
+import singlestoreLogo from "@/assets/logos/singlestore.png";
+
+// SingleStore brand color
+const SINGLESTORE_PURPLE = "#AA8CFF";
 
 export const Hero = () => {
   return (
@@ -38,16 +42,39 @@ export const Hero = () => {
               <span className="text-gradient">at scale.</span>
             </motion.h1>
 
-            {/* Subheading */}
-            <motion.p
+            {/* Subheading with SingleStore branding */}
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl text-muted-foreground max-w-xl mb-8 leading-relaxed"
+              className="mb-8"
             >
-              Cloud Database Engineer at SingleStore. I debug distributed systems, 
-              optimize queries at petabyte scale, and help Fortune 500 teams ship reliable data infrastructure.
-            </motion.p>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mb-4">
+                Cloud Database Support Engineer at
+              </p>
+              <a 
+                href="https://www.singlestore.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-4 py-2 rounded-xl border transition-all duration-300 hover:scale-105 group"
+                style={{
+                  backgroundColor: "rgba(170, 140, 255, 0.1)",
+                  borderColor: "rgba(170, 140, 255, 0.3)",
+                  boxShadow: "0 0 20px rgba(170, 140, 255, 0.15)",
+                }}
+              >
+                <img src={singlestoreLogo} alt="SingleStore" className="w-6 h-6" />
+                <span 
+                  className="font-semibold text-lg"
+                  style={{ color: SINGLESTORE_PURPLE }}
+                >
+                  SingleStore
+                </span>
+              </a>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mt-4">
+                I debug distributed systems, optimize queries at petabyte scale, and help Fortune 500 teams ship reliable data infrastructure.
+              </p>
+            </motion.div>
 
             {/* CTAs */}
             <motion.div
