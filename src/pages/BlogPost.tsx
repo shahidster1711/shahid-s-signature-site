@@ -8,7 +8,7 @@ import { BackgroundGlow } from "@/components/ui/BackgroundGlow";
 import { ReadingProgressBar } from "@/components/ui/ReadingProgressBar";
 import { useEffect } from "react";
 
-const SITE_URL = "https://shahidmoosa.com";
+const SITE_URL = "https://shahidster.tech";
 const AUTHOR_NAME = "Shahid Moosa";
 const TWITTER_HANDLE = "@shahidster_";
 
