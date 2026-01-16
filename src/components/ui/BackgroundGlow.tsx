@@ -1,43 +1,25 @@
-import { motion } from "framer-motion";
-
 export const BackgroundGlow = () => {
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      {/* Primary glow */}
-      <motion.div
-        className="absolute w-[600px] h-[600px] rounded-full"
+    <div className="fixed inset-0 pointer-events-none overflow-hidden gpu-accelerated">
+      {/* Primary glow - CSS animation for better performance */}
+      <div
+        className="absolute w-[600px] h-[600px] rounded-full animate-glow-float-primary"
         style={{
           background: "radial-gradient(circle, hsl(38 92% 50% / 0.08) 0%, transparent 70%)",
           top: "10%",
           left: "20%",
-        }}
-        animate={{
-          x: [0, 50, 0],
-          y: [0, 30, 0],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
+          willChange: "transform",
         }}
       />
       
-      {/* Secondary glow */}
-      <motion.div
-        className="absolute w-[400px] h-[400px] rounded-full"
+      {/* Secondary glow - CSS animation for better performance */}
+      <div
+        className="absolute w-[400px] h-[400px] rounded-full animate-glow-float-secondary"
         style={{
           background: "radial-gradient(circle, hsl(38 92% 50% / 0.05) 0%, transparent 70%)",
           bottom: "20%",
           right: "10%",
-        }}
-        animate={{
-          x: [0, -30, 0],
-          y: [0, -50, 0],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
+          willChange: "transform",
         }}
       />
       
