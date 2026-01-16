@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, Mail, FileDown } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, FileDown, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LiveTerminal } from "@/components/ui/LiveTerminal";
 import shahidPhoto from "@/assets/shahid-moosa.jpg";
@@ -116,7 +116,7 @@ export const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex items-center gap-4"
+              className="flex items-center gap-4 mb-8"
             >
               <a
                 href="https://github.com/shahidmoosa"
@@ -142,6 +142,57 @@ export const Hero = () => {
                 aria-label="Email"
               >
                 <Mail className="w-5 h-5" />
+              </a>
+            </motion.div>
+
+            {/* Verified Systems Expertise - SingleStore Endorsement */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <Star className="w-4 h-4" style={{ color: SINGLESTORE_PURPLE }} />
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Verified Systems Expertise
+                </span>
+              </div>
+              <a
+                href="https://www.singlestore.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block max-w-sm p-4 rounded-xl border transition-all duration-300 hover:scale-[1.02] group"
+                style={{
+                  backgroundColor: "rgba(170, 140, 255, 0.08)",
+                  borderColor: "rgba(170, 140, 255, 0.25)",
+                  boxShadow: "0 0 30px rgba(170, 140, 255, 0.1)",
+                }}
+              >
+                <div className="flex items-start gap-4">
+                  <div 
+                    className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 p-2"
+                    style={{ 
+                      backgroundColor: "rgba(170, 140, 255, 0.15)",
+                      border: "1px solid rgba(170, 140, 255, 0.3)",
+                    }}
+                  >
+                    <img src={singlestoreLogo} alt="SingleStore" className="w-full h-full object-contain" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h4 
+                        className="font-semibold"
+                        style={{ color: SINGLESTORE_PURPLE }}
+                      >
+                        SingleStore DB
+                      </h4>
+                      <ExternalLink className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Power your data-intensive apps with the only database that allows you to transact, analyze & contextualize data in real-time.
+                    </p>
+                  </div>
+                </div>
               </a>
             </motion.div>
           </div>
