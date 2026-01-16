@@ -3,7 +3,7 @@ import { ArrowDown, Github, Linkedin, Mail, FileDown, Star, ExternalLink } from 
 import { Button } from "@/components/ui/button";
 import { LiveTerminal } from "@/components/ui/LiveTerminal";
 import shahidPhoto from "@/assets/shahid-moosa.jpg";
-import singlestoreLogo from "@/assets/logos/singlestore.png";
+import singlestoreLogo from "@/assets/logos/singlestore.svg";
 
 // SingleStore brand color
 const SINGLESTORE_PURPLE = "#AA8CFF";
