@@ -46,9 +46,9 @@ export const Header = () => {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="font-heading font-bold text-xl tracking-tight hover:text-primary transition-colors"
+              className="font-mono text-lg tracking-tight hover:text-primary transition-colors group"
             >
-              shahid<span className="text-primary">.</span>
+              <span className="text-primary">@</span>shahidster<span className="text-primary group-hover:animate-pulse">_</span>
             </a>
 
             {/* Desktop Nav */}
