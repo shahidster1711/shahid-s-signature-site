@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { ArrowUpRight } from "lucide-react";
-import singlestoreLogo from "@/assets/logos/singlestore.png";
+import singlestoreLogo from "@/assets/logos/singlestore.svg";
 import awsLogo from "@/assets/logos/aws.png";
 import infosysLogo from "@/assets/logos/infosys.png";
 
