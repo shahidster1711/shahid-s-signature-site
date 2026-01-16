@@ -5,7 +5,71 @@ import { getArticleBySlug, articles, Article } from "@/data/articles";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BackgroundGlow } from "@/components/ui/BackgroundGlow";
+import { ReadingProgressBar } from "@/components/ui/ReadingProgressBar";
 import { useEffect } from "react";
+
+const SITE_URL = "https://shahidmoosa.com";
+const AUTHOR_NAME = "Shahid Moosa";
+const TWITTER_HANDLE = "@shahidster_";
+
+// Update document meta tags for social sharing
+function updateMetaTags(article: Article) {
+  const articleUrl = `${SITE_URL}/blog/${article.slug}`;
+  
+  // Helper to set or create meta tag
+  const setMeta = (property: string, content: string, isName = false) => {
+    const selector = isName ? `meta[name="${property}"]` : `meta[property="${property}"]`;
+    let meta = document.querySelector(selector) as HTMLMetaElement;
+    if (!meta) {
+      meta = document.createElement("meta");
+      if (isName) {
+        meta.name = property;
+      } else {
+        meta.setAttribute("property", property);
+      }
+      document.head.appendChild(meta);
+    }
+    meta.content = content;
+  };
+
+  // Update page title
+  document.title = `${article.title} | ${AUTHOR_NAME}`;
+
+  // Open Graph tags
+  setMeta("og:type", "article");
+  setMeta("og:title", article.title);
+  setMeta("og:description", article.description);
+  setMeta("og:url", articleUrl);
+  setMeta("og:site_name", `${AUTHOR_NAME} - Distributed Systems Engineer`);
+  setMeta("og:locale", "en_US");
+  setMeta("article:author", AUTHOR_NAME);
+  setMeta("article:published_time", new Date(article.date).toISOString());
+  setMeta("article:section", article.category);
+  
+  // Twitter Card tags
+  setMeta("twitter:card", "summary_large_image", true);
+  setMeta("twitter:site", TWITTER_HANDLE, true);
+  setMeta("twitter:creator", TWITTER_HANDLE, true);
+  setMeta("twitter:title", article.title, true);
+  setMeta("twitter:description", article.description, true);
+  
+  // Keywords
+  if (article.seoKeywords?.length) {
+    setMeta("keywords", article.seoKeywords.join(", "), true);
+  }
+  
+  // Description
+  setMeta("description", article.description, true);
+  
+  // Canonical URL
+  let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+  if (!canonical) {
+    canonical = document.createElement("link");
+    canonical.rel = "canonical";
+    document.head.appendChild(canonical);
+  }
+  canonical.href = articleUrl;
+}
 
 // Get prev/next articles in series order
 function getSeriesNavigation(currentSlug: string): { prev: Article | null; next: Article | null; currentIndex: number; total: number } {
@@ -100,9 +164,12 @@ export default function BlogPost() {
     ? getSeriesNavigation(article.slug) 
     : { prev: null, next: null, currentIndex: 0, total: 0 };
 
-  // Inject JSON-LD structured data into head
+  // Inject JSON-LD structured data and meta tags into head
   useEffect(() => {
     if (!article) return;
+
+    // Update social meta tags
+    updateMetaTags(article);
 
     // Remove any existing JSON-LD scripts
     const existingScripts = document.querySelectorAll('script[type="application/ld+json"][data-blog-jsonld]');
@@ -126,6 +193,7 @@ export default function BlogPost() {
     return () => {
       articleScript.remove();
       breadcrumbScript.remove();
+      document.title = `${AUTHOR_NAME} - Distributed Systems Engineer`;
     };
   }, [article, currentIndex, total]);
 
@@ -158,6 +226,7 @@ export default function BlogPost() {
 
   return (
     <div className="min-h-screen flex flex-col relative">
+      <ReadingProgressBar />
       <BackgroundGlow />
       <Header />
       
