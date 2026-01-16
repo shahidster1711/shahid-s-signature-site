@@ -1,6 +1,6 @@
 import { articles } from "@/data/articles";
 
-const SITE_URL = "https://shahidmoosa.com";
+const SITE_URL = "https://shahidster.tech";
 const SITE_TITLE = "Shahid Moosa — Distributed Systems Engineering";
 const SITE_DESCRIPTION = "Deep dives into distributed databases, data infrastructure, and production systems. Written by a senior distributed-systems engineer.";
 

@@ -1,6 +1,6 @@
 import { articles } from "@/data/articles";
 
-const SITE_URL = "https://shahidmoosa.com";
+const SITE_URL = "https://shahidster.tech";
 
 interface SitemapUrl {
   loc: string;
