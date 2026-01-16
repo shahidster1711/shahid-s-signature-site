@@ -5,6 +5,7 @@ import { getArticleBySlug, articles, Article } from "@/data/articles";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BackgroundGlow } from "@/components/ui/BackgroundGlow";
+import { useEffect } from "react";
 
 // Get prev/next articles in series order
 function getSeriesNavigation(currentSlug: string): { prev: Article | null; next: Article | null; currentIndex: number; total: number } {
@@ -17,9 +18,116 @@ function getSeriesNavigation(currentSlug: string): { prev: Article | null; next:
   };
 }
 
+// Generate JSON-LD structured data for Article schema
+function generateArticleJsonLd(article: Article, currentIndex: number, total: number): object {
+  const siteUrl = "https://shahidmoosa.com";
+  const articleUrl = `${siteUrl}/blog/${article.slug}`;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": articleUrl,
+    "headline": article.title,
+    "description": article.description,
+    "datePublished": new Date(article.date).toISOString(),
+    "dateModified": new Date(article.date).toISOString(),
+    "author": {
+      "@type": "Person",
+      "name": "Shahid Moosa",
+      "url": siteUrl,
+      "jobTitle": "Distributed Systems Engineer"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Shahid Moosa",
+      "url": siteUrl
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": articleUrl
+    },
+    "articleSection": article.category,
+    "keywords": article.seoKeywords?.join(", ") || article.category,
+    "wordCount": Math.round(article.content.split(/\s+/).length),
+    "isPartOf": {
+      "@type": "CreativeWorkSeries",
+      "name": "Distributed Systems Series",
+      "position": currentIndex,
+      "numberOfItems": total
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Distributed Systems"
+    },
+    "inLanguage": "en-US"
+  };
+}
+
+// Generate BreadcrumbList JSON-LD
+function generateBreadcrumbJsonLd(article: Article): object {
+  const siteUrl = "https://shahidmoosa.com";
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Writing",
+        "item": `${siteUrl}/#writing`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": article.title,
+        "item": `${siteUrl}/blog/${article.slug}`
+      }
+    ]
+  };
+}
+
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const article = slug ? getArticleBySlug(slug) : undefined;
+  const { prev, next, currentIndex, total } = article 
+    ? getSeriesNavigation(article.slug) 
+    : { prev: null, next: null, currentIndex: 0, total: 0 };
+
+  // Inject JSON-LD structured data into head
+  useEffect(() => {
+    if (!article) return;
+
+    // Remove any existing JSON-LD scripts
+    const existingScripts = document.querySelectorAll('script[type="application/ld+json"][data-blog-jsonld]');
+    existingScripts.forEach(script => script.remove());
+
+    // Create Article schema script
+    const articleScript = document.createElement('script');
+    articleScript.type = 'application/ld+json';
+    articleScript.setAttribute('data-blog-jsonld', 'article');
+    articleScript.textContent = JSON.stringify(generateArticleJsonLd(article, currentIndex, total));
+    document.head.appendChild(articleScript);
+
+    // Create BreadcrumbList schema script
+    const breadcrumbScript = document.createElement('script');
+    breadcrumbScript.type = 'application/ld+json';
+    breadcrumbScript.setAttribute('data-blog-jsonld', 'breadcrumb');
+    breadcrumbScript.textContent = JSON.stringify(generateBreadcrumbJsonLd(article));
+    document.head.appendChild(breadcrumbScript);
+
+    // Cleanup on unmount
+    return () => {
+      articleScript.remove();
+      breadcrumbScript.remove();
+    };
+  }, [article, currentIndex, total]);
 
   if (!article) {
     return (
@@ -42,8 +150,6 @@ export default function BlogPost() {
       </div>
     );
   }
-
-  const { prev, next, currentIndex, total } = getSeriesNavigation(article.slug);
 
   // Get related articles (same category, excluding current)
   const relatedArticles = articles
