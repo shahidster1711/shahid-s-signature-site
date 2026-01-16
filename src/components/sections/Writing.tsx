@@ -9,7 +9,6 @@ const articles = [
     category: "Architecture",
     readTime: "14 min read",
     date: "Jan 2026",
-    href: "https://shahidster.tech/blog/latency-tax-disaggregated-storage",
     featured: true,
   },
   {
@@ -18,7 +17,6 @@ const articles = [
     category: "Deep Dive",
     readTime: "11 min read",
     date: "Jan 2026",
-    href: "https://shahidster.tech/blog/non-blocking-ddl-myth",
     featured: true,
   },
   {
@@ -27,7 +25,6 @@ const articles = [
     category: "Performance",
     readTime: "13 min read",
     date: "Dec 2025",
-    href: "https://shahidster.tech/blog/surviving-data-skew-distributed-joins",
     featured: false,
   },
   {
@@ -36,7 +33,6 @@ const articles = [
     category: "Architecture",
     readTime: "10 min read",
     date: "Dec 2025",
-    href: "https://shahidster.tech/blog/pragmatic-consistency",
     featured: false,
   },
   {
@@ -45,7 +41,6 @@ const articles = [
     category: "Operations",
     readTime: "12 min read",
     date: "Nov 2025",
-    href: "https://shahidster.tech/blog/defensive-ingestion-htap-backpressure",
     featured: false,
   },
   {
@@ -54,7 +49,6 @@ const articles = [
     category: "Fundamentals",
     readTime: "8 min read",
     date: "Nov 2025",
-    href: "https://shahidster.tech/blog/cap-theorem-production",
     featured: false,
   },
   {
@@ -63,7 +57,6 @@ const articles = [
     category: "Deep Dive",
     readTime: "12 min read",
     date: "Oct 2025",
-    href: "https://shahidster.tech/blog/query-optimization-petabyte-scale",
     featured: false,
   },
   {
@@ -72,7 +65,6 @@ const articles = [
     category: "Operations",
     readTime: "10 min read",
     date: "Oct 2025",
-    href: "https://shahidster.tech/blog/incident-response-database-engineers",
     featured: false,
   },
   {
@@ -81,7 +73,6 @@ const articles = [
     category: "Architecture",
     readTime: "15 min read",
     date: "Sep 2025",
-    href: "https://shahidster.tech/blog/sharding-strategies",
     featured: false,
   },
 ];
@@ -101,30 +92,28 @@ export const Writing = () => {
       {/* Featured Articles */}
       <div className="grid md:grid-cols-2 gap-6 mb-8">
         {featuredArticles.map((article, index) => (
-          <motion.a
+          <motion.div
             key={article.title}
-            href={article.href}
-            target="_blank"
-            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ y: -4 }}
-            className="group relative card-elevated p-8 hover:border-primary/40 transition-all duration-300 overflow-hidden"
+            className="group relative card-elevated p-8 transition-all duration-300 overflow-hidden cursor-default"
           >
-            {/* Background gradient on hover */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            {/* Background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50" />
             
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-primary/15 text-primary border border-primary/20">
                   {article.category}
                 </span>
-                <ArrowUpRight className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                <span className="text-xs font-medium px-2 py-1 rounded-full bg-muted text-muted-foreground">
+                  Coming Soon
+                </span>
               </div>
               
-              <h3 className="font-heading text-xl font-semibold mb-3 group-hover:text-primary transition-colors leading-snug">
+              <h3 className="font-heading text-xl font-semibold mb-3 leading-snug">
                 {article.title}
               </h3>
               
@@ -143,24 +132,20 @@ export const Writing = () => {
                 </span>
               </div>
             </div>
-          </motion.a>
+          </motion.div>
         ))}
       </div>
 
       {/* Other Articles */}
       <div className="grid md:grid-cols-2 gap-4">
         {otherArticles.map((article, index) => (
-          <motion.a
+          <motion.div
             key={article.title}
-            href={article.href}
-            target="_blank"
-            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: index * 0.1 }}
-            whileHover={{ x: 4 }}
-            className="group flex items-center justify-between p-4 rounded-lg border border-border/50 hover:border-primary/30 hover:bg-card/50 transition-all duration-300"
+            className="group flex items-center justify-between p-4 rounded-lg border border-border/50 bg-card/30 cursor-default"
           >
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-3 mb-1">
@@ -171,16 +156,18 @@ export const Writing = () => {
                   {article.readTime}
                 </span>
               </div>
-              <h4 className="font-medium group-hover:text-primary transition-colors truncate">
+              <h4 className="font-medium truncate">
                 {article.title}
               </h4>
             </div>
-            <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-4" />
-          </motion.a>
+            <span className="text-xs font-medium px-2 py-1 rounded-full bg-muted text-muted-foreground shrink-0 ml-4">
+              Soon
+            </span>
+          </motion.div>
         ))}
       </div>
 
-      {/* View all link */}
+      {/* Subscribe hint */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -188,16 +175,10 @@ export const Writing = () => {
         transition={{ duration: 0.5, delay: 0.4 }}
         className="mt-12 text-center"
       >
-        <a
-          href="https://shahidster.tech/blog"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border hover:border-primary/50 text-sm text-muted-foreground hover:text-foreground transition-all duration-300 group"
-        >
+        <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border text-sm text-muted-foreground">
           <BookOpen className="w-4 h-4" />
-          View all articles
-          <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-        </a>
+          Blog launching soon — stay tuned
+        </div>
       </motion.div>
     </Section>
   );
