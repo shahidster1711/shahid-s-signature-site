@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, FileDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LiveTerminal } from "@/components/ui/LiveTerminal";
 import shahidPhoto from "@/assets/shahid-moosa.jpg";
@@ -70,6 +70,17 @@ export const Hero = () => {
                 onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 See my work
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="lg" 
+                className="font-medium px-8 h-12 text-base gap-2"
+                asChild
+              >
+                <a href="/resume.pdf" download="Shahid_Moosa_Resume.pdf">
+                  <FileDown className="w-4 h-4" />
+                  Resume
+                </a>
               </Button>
             </motion.div>
 

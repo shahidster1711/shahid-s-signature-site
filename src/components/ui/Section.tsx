@@ -12,10 +12,10 @@ export const Section = ({ children, className, id }: SectionProps) => {
   return (
     <motion.section
       id={id}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+      transition={{ duration: 0.8 }}
       className={cn("py-24 md:py-32", className)}
     >
       <div className="section-container">
@@ -37,17 +37,35 @@ export const SectionHeader = ({
   return (
     <div className="mb-16 max-w-2xl">
       {label && (
-        <span className="text-primary font-medium text-sm tracking-wider uppercase mb-4 block">
+        <motion.span 
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-primary font-medium text-sm tracking-wider uppercase mb-4 block"
+        >
           {label}
-        </span>
+        </motion.span>
       )}
-      <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 leading-tight">
+      <motion.h2 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 leading-tight"
+      >
         {title}
-      </h2>
+      </motion.h2>
       {description && (
-        <p className="text-muted-foreground text-lg leading-relaxed">
+        <motion.p 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-muted-foreground text-lg leading-relaxed"
+        >
           {description}
-        </p>
+        </motion.p>
       )}
     </div>
   );
