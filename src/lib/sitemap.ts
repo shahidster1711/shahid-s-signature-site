@@ -1,0 +1,63 @@
+import { articles } from "@/data/articles";
+
+const SITE_URL = "https://shahidmoosa.com";
+
+interface SitemapUrl {
+  loc: string;
+  lastmod?: string;
+  changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
+  priority?: number;
+}
+
+export function generateSitemap(): string {
+  const urls: SitemapUrl[] = [
+    // Homepage
+    {
+      loc: SITE_URL,
+      lastmod: new Date().toISOString().split("T")[0],
+      changefreq: "weekly",
+      priority: 1.0,
+    },
+    // Blog posts
+    ...articles.map((article) => ({
+      loc: `${SITE_URL}/blog/${article.slug}`,
+      lastmod: new Date(article.date).toISOString().split("T")[0],
+      changefreq: "monthly" as const,
+      priority: 0.8,
+    })),
+  ];
+
+  const urlsXml = urls
+    .map(
+      (url) => `  <url>
+    <loc>${escapeXml(url.loc)}</loc>
+    ${url.lastmod ? `<lastmod>${url.lastmod}</lastmod>` : ""}
+    ${url.changefreq ? `<changefreq>${url.changefreq}</changefreq>` : ""}
+    ${url.priority !== undefined ? `<priority>${url.priority.toFixed(1)}</priority>` : ""}
+  </url>`
+    )
+    .join("\n");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urlsXml}
+</urlset>`;
+}
+
+// Generate robots.txt with sitemap reference
+export function generateRobotsTxt(): string {
+  return `User-agent: *
+Allow: /
+
+Sitemap: ${SITE_URL}/sitemap.xml
+`;
+}
+
+function escapeXml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
