@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { ArrowUpRight } from "lucide-react";
-import { SingleStoreLogo, AWSLogo, InfosysLogo } from "@/components/ui/CompanyLogos";
+import singlestoreLogo from "@/assets/logos/singlestore.svg";
+import awsLogo from "@/assets/logos/aws.png";
+import infosysLogo from "@/assets/logos/infosys.svg";
 
 // Brand colors for each company
 const brandColors = {
@@ -29,7 +31,7 @@ const experiences = [
   {
     company: "SingleStore",
     brandKey: "singlestore" as const,
-    LogoComponent: SingleStoreLogo,
+    logo: singlestoreLogo,
     role: "Database Cloud Support Engineer",
     period: "Jan 2024 — Present",
     current: true,
@@ -44,7 +46,7 @@ const experiences = [
   {
     company: "Amazon Web Services",
     brandKey: "aws" as const,
-    LogoComponent: AWSLogo,
+    logo: awsLogo,
     role: "Cloud Support Associate",
     period: "Jul 2022 — Jan 2024",
     current: false,
@@ -59,7 +61,7 @@ const experiences = [
   {
     company: "Infosys",
     brandKey: "infosys" as const,
-    LogoComponent: InfosysLogo,
+    logo: infosysLogo,
     role: "Senior System Associate",
     period: "Apr 2020 — Jul 2022",
     current: false,
@@ -85,7 +87,6 @@ export const Work = () => {
       <div className="space-y-8">
         {experiences.map((exp, index) => {
           const colors = brandColors[exp.brandKey];
-          const LogoComponent = exp.LogoComponent;
           
           return (
             <motion.article
@@ -110,14 +111,18 @@ export const Work = () => {
                   <div className="flex items-start gap-4">
                     {/* Company logo with brand styling */}
                     <div 
-                      className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300 group-hover:scale-105"
+                      className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 p-2.5 border transition-all duration-300 group-hover:scale-105"
                       style={{ 
                         backgroundColor: colors.bg,
                         borderColor: colors.border,
                         boxShadow: `0 0 20px ${colors.glow}`,
                       }}
                     >
-                      <LogoComponent size={32} />
+                      <img 
+                        src={exp.logo} 
+                        alt={`${exp.company} logo`}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                     <div>
                       <h3 className="font-heading text-xl font-semibold flex items-center gap-2">

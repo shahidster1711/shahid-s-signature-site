@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { ArrowDown, Github, Linkedin, Mail, FileDown, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LiveTerminal } from "@/components/ui/LiveTerminal";
-import { SingleStoreLogo } from "@/components/ui/CompanyLogos";
 import shahidPhoto from "@/assets/shahid-moosa.jpg";
+import singlestoreLogo from "@/assets/logos/singlestore.svg";
 
 // SingleStore brand color
 const SINGLESTORE_PURPLE = "#AA8CFF";
@@ -63,7 +63,7 @@ export const Hero = () => {
                   boxShadow: "0 0 20px rgba(170, 140, 255, 0.15)",
                 }}
               >
-                <SingleStoreLogo size={24} />
+                <img src={singlestoreLogo} alt="SingleStore" className="w-6 h-6" />
                 <span 
                   className="font-semibold text-lg"
                   style={{ color: SINGLESTORE_PURPLE }}
@@ -170,13 +170,13 @@ export const Hero = () => {
               >
                 <div className="flex items-start gap-4">
                   <div 
-                    className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0"
+                    className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 p-2"
                     style={{ 
                       backgroundColor: "rgba(170, 140, 255, 0.15)",
                       border: "1px solid rgba(170, 140, 255, 0.3)",
                     }}
                   >
-                    <SingleStoreLogo size={28} />
+                    <img src={singlestoreLogo} alt="SingleStore" className="w-full h-full object-contain" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
