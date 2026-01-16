@@ -215,6 +215,10 @@ export const Hero = () => {
                   src={shahidPhoto}
                   alt="Shahid Moosa"
                   className="w-full h-full object-cover"
+                  width={256}
+                  height={256}
+                  fetchPriority="high"
+                  decoding="async"
                 />
               </div>
               
