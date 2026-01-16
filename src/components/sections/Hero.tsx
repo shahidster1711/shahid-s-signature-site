@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, Mail, User } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LiveTerminal } from "@/components/ui/LiveTerminal";
+import shahidPhoto from "@/assets/shahid-moosa.jpg";
 
 export const Hero = () => {
   return (
@@ -119,9 +120,13 @@ export const Hero = () => {
               {/* Outer glow ring */}
               <div className="absolute -inset-1 bg-gradient-to-r from-primary via-primary/50 to-primary rounded-full blur-md opacity-60 animate-pulse" />
               
-              {/* Photo container - placeholder until user uploads photo */}
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-primary/30 bg-muted flex items-center justify-center">
-                <User className="w-20 h-20 text-muted-foreground" />
+              {/* Photo container */}
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-primary/30">
+                <img
+                  src={shahidPhoto}
+                  alt="Shahid Moosa"
+                  className="w-full h-full object-cover"
+                />
               </div>
               
               {/* Active indicator */}
