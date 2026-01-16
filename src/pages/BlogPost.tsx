@@ -1,10 +1,21 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Clock, Calendar, Tag } from "lucide-react";
-import { getArticleBySlug, articles } from "@/data/articles";
+import { ArrowLeft, ArrowRight, Clock, Calendar, BookOpen } from "lucide-react";
+import { getArticleBySlug, articles, Article } from "@/data/articles";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BackgroundGlow } from "@/components/ui/BackgroundGlow";
+
+// Get prev/next articles in series order
+function getSeriesNavigation(currentSlug: string): { prev: Article | null; next: Article | null; currentIndex: number; total: number } {
+  const currentIndex = articles.findIndex(a => a.slug === currentSlug);
+  return {
+    prev: currentIndex > 0 ? articles[currentIndex - 1] : null,
+    next: currentIndex < articles.length - 1 ? articles[currentIndex + 1] : null,
+    currentIndex: currentIndex + 1,
+    total: articles.length
+  };
+}
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
@@ -32,6 +43,8 @@ export default function BlogPost() {
     );
   }
 
+  const { prev, next, currentIndex, total } = getSeriesNavigation(article.slug);
+
   // Get related articles (same category, excluding current)
   const relatedArticles = articles
     .filter(a => a.category === article.category && a.slug !== article.slug)
@@ -57,6 +70,58 @@ export default function BlogPost() {
               <ArrowLeft className="w-4 h-4" />
               Back to articles
             </Link>
+          </motion.div>
+
+          {/* Series Navigation Banner */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.05 }}
+            className="mb-8 p-4 rounded-lg border border-border/50 bg-card/30"
+          >
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="flex items-center gap-3">
+                <BookOpen className="w-5 h-5 text-primary" />
+                <div>
+                  <p className="text-sm text-muted-foreground">Distributed Systems Series</p>
+                  <p className="font-medium text-foreground">
+                    {article.seriesPosition || `Part ${currentIndex} of ${total}`}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                {prev ? (
+                  <Link
+                    to={`/blog/${prev.slug}`}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md bg-muted/50 hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+                    title={prev.title}
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Previous</span>
+                  </Link>
+                ) : (
+                  <span className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md bg-muted/30 text-muted-foreground/50 cursor-not-allowed">
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Previous</span>
+                  </span>
+                )}
+                {next ? (
+                  <Link
+                    to={`/blog/${next.slug}`}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md bg-primary/10 hover:bg-primary/20 transition-colors text-primary"
+                    title={next.title}
+                  >
+                    <span className="hidden sm:inline">Next</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                ) : (
+                  <span className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md bg-muted/30 text-muted-foreground/50 cursor-not-allowed">
+                    <span className="hidden sm:inline">Next</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                )}
+              </div>
+            </div>
           </motion.div>
 
           {/* Header */}
@@ -116,13 +181,54 @@ export default function BlogPost() {
             dangerouslySetInnerHTML={{ __html: formatContent(article.content) }}
           />
 
+          {/* Bottom Series Navigation */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-4"
+          >
+            {prev ? (
+              <Link
+                to={`/blog/${prev.slug}`}
+                className="group flex flex-col p-4 rounded-lg border border-border/50 bg-card/30 hover:bg-card/50 transition-colors"
+              >
+                <span className="text-xs text-muted-foreground flex items-center gap-1 mb-2">
+                  <ArrowLeft className="w-3 h-3" />
+                  Previous in series
+                </span>
+                <span className="font-medium group-hover:text-primary transition-colors line-clamp-2">
+                  {prev.title}
+                </span>
+              </Link>
+            ) : (
+              <div />
+            )}
+            {next ? (
+              <Link
+                to={`/blog/${next.slug}`}
+                className="group flex flex-col p-4 rounded-lg border border-border/50 bg-card/30 hover:bg-card/50 transition-colors text-right sm:items-end"
+              >
+                <span className="text-xs text-muted-foreground flex items-center gap-1 mb-2 justify-end">
+                  Next in series
+                  <ArrowRight className="w-3 h-3" />
+                </span>
+                <span className="font-medium group-hover:text-primary transition-colors line-clamp-2">
+                  {next.title}
+                </span>
+              </Link>
+            ) : (
+              <div />
+            )}
+          </motion.div>
+
           {/* Related Articles */}
           {relatedArticles.length > 0 && (
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-20 pt-12 border-t border-border"
+              className="mt-12 pt-12 border-t border-border"
             >
               <h2 className="font-heading text-2xl font-semibold mb-8">Related Articles</h2>
               <div className="grid gap-4">
