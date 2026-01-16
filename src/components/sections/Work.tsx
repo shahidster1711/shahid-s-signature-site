@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { ArrowUpRight } from "lucide-react";
 import singlestoreLogo from "@/assets/logos/singlestore.svg";
-import awsLogo from "@/assets/logos/aws.png";
-import infosysLogo from "@/assets/logos/infosys.png";
+import awsLogo from "@/assets/logos/aws.svg";
+import infosysLogo from "@/assets/logos/infosys.svg";
 
 // Brand colors for each company
 const brandColors = {
