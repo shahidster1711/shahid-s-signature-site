@@ -20,7 +20,9 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    useEffect(scrollToBottom, [messages, isLoading]);
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages, isLoading]);
 
     const handleSend = () => {
         if (input.trim()) {

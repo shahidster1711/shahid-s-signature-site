@@ -12,6 +12,8 @@ const navItems = [
     { name: 'Projects', id: 'projects' },
     { name: 'Skills', id: 'skills' },
     { name: 'Certifications', id: 'certifications' },
+    { name: 'Education', id: 'education' },
+    { name: 'Contact', id: 'contact' },
 ];
 
 const Header: React.FC<HeaderProps> = ({ activeSection }) => {
@@ -35,12 +37,6 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                         {item.name}
                     </a>
                 ))}
-                <a 
-                    href="mailto:connect2shahidmoosa@gmail.com"
-                    className="ml-2 px-4 py-2 rounded-lg text-sm font-medium bg-gradient-to-r from-accent to-cyan-500 text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
-                >
-                    Contact
-                </a>
             </nav>
             
             {/* Mobile menu button */}
