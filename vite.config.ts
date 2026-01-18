@@ -18,4 +18,25 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // Optimize build output
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui-vendor': ['framer-motion', '@radix-ui/react-avatar'],
+        },
+      },
+    },
+    // Enable minification
+    minify: 'esbuild',
+    // Optimize chunk size
+    chunkSizeWarningLimit: 1000,
+    // Source maps for production debugging (optional, can be disabled for smaller builds)
+    sourcemap: false,
+  },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
+  },
 }));

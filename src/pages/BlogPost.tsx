@@ -84,7 +84,7 @@ function getSeriesNavigation(currentSlug: string): { prev: Article | null; next:
 
 // Generate JSON-LD structured data for Article schema
 function generateArticleJsonLd(article: Article, currentIndex: number, total: number): object {
-  const siteUrl = "https://shahidmoosa.com";
+  const siteUrl = "https://shahidster.tech";
   const articleUrl = `${siteUrl}/blog/${article.slug}`;
   
   return {
@@ -129,7 +129,7 @@ function generateArticleJsonLd(article: Article, currentIndex: number, total: nu
 
 // Generate BreadcrumbList JSON-LD
 function generateBreadcrumbJsonLd(article: Article): object {
-  const siteUrl = "https://shahidmoosa.com";
+  const siteUrl = "https://shahidster.tech";
   
   return {
     "@context": "https://schema.org",
