@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "deploy": "vite build && firebase deploy"
+    "deploy": "vite build && node scripts/generate-sitemap.js && firebase deploy",
+    "postbuild": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

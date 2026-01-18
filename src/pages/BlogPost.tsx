@@ -42,9 +42,11 @@ function updateMetaTags(article: Article) {
   setMeta("og:url", articleUrl);
   setMeta("og:site_name", `${AUTHOR_NAME} - Distributed Systems Engineer`);
   setMeta("og:locale", "en_US");
+  setMeta("og:image", `${SITE_URL}/og-image.png`);
   setMeta("article:author", AUTHOR_NAME);
   setMeta("article:published_time", new Date(article.date).toISOString());
   setMeta("article:section", article.category);
+  setMeta("article:tag", article.seoKeywords?.join(", ") || article.category);
   
   // Twitter Card tags
   setMeta("twitter:card", "summary_large_image", true);
@@ -52,6 +54,7 @@ function updateMetaTags(article: Article) {
   setMeta("twitter:creator", TWITTER_HANDLE, true);
   setMeta("twitter:title", article.title, true);
   setMeta("twitter:description", article.description, true);
+  setMeta("twitter:image", `${SITE_URL}/og-image.png`, true);
   
   // Keywords
   if (article.seoKeywords?.length) {
@@ -123,7 +126,13 @@ function generateArticleJsonLd(article: Article, currentIndex: number, total: nu
       "@type": "Thing",
       "name": "Distributed Systems"
     },
-    "inLanguage": "en-US"
+    "inLanguage": "en-US",
+    "image": {
+      "@type": "ImageObject",
+      "url": `${siteUrl}/og-image.png`,
+      "width": 1200,
+      "height": 630
+    }
   };
 }
 
