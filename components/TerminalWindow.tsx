@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const commands = [
     { prompt: '❯ ', cmd: 'SELECT status FROM cloud_engineer WHERE name = "Shahid";', output: '┌─────────┐\n│ status  │\n├─────────┤\n│ ONLINE  │\n└─────────┘' },
@@ -12,33 +12,52 @@ const TerminalWindow: React.FC = () => {
     const [displayText, setDisplayText] = useState('');
     const [showOutput, setShowOutput] = useState(false);
     const [showCursor, setShowCursor] = useState(true);
+    const timeoutRefs = useRef<number[]>([]);
 
     useEffect(() => {
         const cmd = commands[currentCommand];
         const fullCommand = cmd.prompt + cmd.cmd;
         let charIndex = 0;
+        let cancelled = false;
+        
+        // Clear any pending timeouts from previous runs
+        timeoutRefs.current.forEach(id => clearTimeout(id));
+        timeoutRefs.current = [];
         
         setDisplayText('');
         setShowOutput(false);
 
+        const scheduleTimeout = (fn: () => void, delay: number) => {
+            const id = window.setTimeout(() => {
+                if (!cancelled) fn();
+            }, delay);
+            timeoutRefs.current.push(id);
+            return id;
+        };
+
         const typeCommand = () => {
+            if (cancelled) return;
             if (charIndex < fullCommand.length) {
                 setDisplayText(fullCommand.substring(0, charIndex + 1));
                 charIndex++;
-                setTimeout(typeCommand, 40 + Math.random() * 30);
+                scheduleTimeout(typeCommand, 40 + Math.random() * 30);
             } else {
-                setTimeout(() => {
+                scheduleTimeout(() => {
                     setShowOutput(true);
-                    setTimeout(() => {
+                    scheduleTimeout(() => {
                         setCurrentCommand((prev) => (prev + 1) % commands.length);
                     }, 3000);
                 }, 500);
             }
         };
 
-        const startDelay = setTimeout(typeCommand, 800);
+        scheduleTimeout(typeCommand, 800);
 
-        return () => clearTimeout(startDelay);
+        return () => {
+            cancelled = true;
+            timeoutRefs.current.forEach(id => clearTimeout(id));
+            timeoutRefs.current = [];
+        };
     }, [currentCommand]);
 
     useEffect(() => {

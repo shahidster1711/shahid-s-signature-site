@@ -51,32 +51,41 @@ const App: React.FC = () => {
             <Header activeSection={activeSection} />
             <main className="px-6 md:px-12 lg:px-24">
                 <Hero />
-                <SectionWrapper title="Work Experience" id="experience" icon={<BriefcaseIcon />}>
+                <SectionWrapper title="Database Cloud Support Work Experience" id="experience" icon={<BriefcaseIcon />}>
                     <Experience items={resumeData.workExperience} />
                 </SectionWrapper>
-                <SectionWrapper title="Projects" id="projects" icon={<ProjectIcon />}>
+                <SectionWrapper title="Cloud Infrastructure & Database Projects" id="projects" icon={<ProjectIcon />}>
                     <Projects items={resumeData.projects} />
                 </SectionWrapper>
-                <SectionWrapper title="Technical Skills" id="skills" icon={<CodeIcon />}>
+                <SectionWrapper title="Database, Cloud & DevOps Skills" id="skills" icon={<CodeIcon />}>
                     <Skills skills={resumeData.skills} />
                 </SectionWrapper>
-                <SectionWrapper title="Certifications" id="certifications" icon={<CertificateIcon />}>
+                <SectionWrapper title="Cloud & Database Certifications" id="certifications" icon={<CertificateIcon />}>
                     <Certifications items={resumeData.certifications} />
                 </SectionWrapper>
-                <SectionWrapper title="Education" id="education" icon={<GraduationCapIcon />}>
+                <SectionWrapper title="Cloud Technology & Information Security Education" id="education" icon={<GraduationCapIcon />}>
                     <Education item={resumeData.education} />
                 </SectionWrapper>
-                <SectionWrapper title="Get In Touch" id="contact" icon={<MailIcon />}>
+                <SectionWrapper title="Contact Shahid Moosa" id="contact" icon={<MailIcon />}>
                     <Contact />
                 </SectionWrapper>
             </main>
             
             {/* Footer */}
             <footer className="px-6 md:px-12 lg:px-24 py-8 border-t border-slate-800/50">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                     <p className="text-slate-500 text-sm">
                         © {new Date().getFullYear()} Shahid Moosa. Built with React & Tailwind CSS.
                     </p>
+                    <nav aria-label="Footer" className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
+                        <a href="#home" className="hover:text-accent transition-colors">Home</a>
+                        <a href="#experience" className="hover:text-accent transition-colors">Experience</a>
+                        <a href="#projects" className="hover:text-accent transition-colors">Projects</a>
+                        <a href="#skills" className="hover:text-accent transition-colors">Skills</a>
+                        <a href="#certifications" className="hover:text-accent transition-colors">Certifications</a>
+                        <a href="#education" className="hover:text-accent transition-colors">Education</a>
+                        <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
+                    </nav>
                     <p className="text-slate-600 text-xs font-mono">
                         v1.0.0 | Status: <span className="text-emerald-500">●</span> Operational
                     </p>

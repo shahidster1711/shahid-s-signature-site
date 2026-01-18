@@ -1,5 +1,19 @@
 
 {
   "name": "Shahid Moosa - Portfolio",
-  "description": "A personal portfolio website for Shahid Moosa, a Database Cloud Support Engineer, showcasing his skills, experience, and certifications."
+  "description": "A personal portfolio website for Shahid Moosa, a Database Cloud Support Engineer, showcasing his skills, experience, and certifications.",
+  "siteUrl": "https://www.shahidster.tech",
+  "keywords": [
+    "database cloud support engineer",
+    "distributed databases",
+    "AWS",
+    "SQL",
+    "NoSQL",
+    "cloud infrastructure",
+    "incident response",
+    "performance optimization"
+  ],
+  "pages": [
+    "/"
+  ]
 }
