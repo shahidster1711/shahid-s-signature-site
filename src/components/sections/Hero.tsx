@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, Mail, FileDown, Star, ExternalLink, GraduationCap } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, FileDown, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { LiveTerminal } from "@/components/ui/LiveTerminal";
@@ -157,55 +157,27 @@ export const Hero = () => {
               </a>
             </motion.div>
 
-            {/* Verified Systems Expertise - SingleStore Endorsement */}
+            {/* Impact stats */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
+              className="grid grid-cols-2 gap-3 max-w-sm"
             >
-              <div className="flex items-center gap-2 mb-3">
-                <Star className="w-4 h-4" style={{ color: SINGLESTORE_PURPLE }} />
-                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Verified Systems Expertise
-                </span>
-              </div>
-              <a
-                href="https://www.singlestore.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block max-w-sm p-4 rounded-xl border transition-all duration-300 hover:scale-[1.02] group"
-                style={{
-                  backgroundColor: "rgba(170, 140, 255, 0.08)",
-                  borderColor: "rgba(170, 140, 255, 0.25)",
-                  boxShadow: "0 0 30px rgba(170, 140, 255, 0.1)",
-                }}
-              >
-                <div className="flex items-start gap-4">
-                  <div 
-                    className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 p-2"
-                    style={{ 
-                      backgroundColor: "rgba(170, 140, 255, 0.15)",
-                      border: "1px solid rgba(170, 140, 255, 0.3)",
-                    }}
-                  >
-                    <img src={singlestoreLogo} alt="SingleStore" className="w-full h-full object-contain" loading="lazy" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 
-                        className="font-semibold"
-                        style={{ color: SINGLESTORE_PURPLE }}
-                      >
-                        SingleStore DB
-                      </h4>
-                      <ExternalLink className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Power your data-intensive apps with the only database that allows you to transact, analyze & contextualize data in real-time.
-                    </p>
-                  </div>
+              {[
+                { value: "5+ yrs", label: "Enterprise support" },
+                { value: "20+", label: "Engineers trained" },
+                { value: "50+", label: "Global customers" },
+                { value: "25+", label: "KB articles authored" },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  className="p-3 rounded-lg border border-border/50 bg-card/40"
+                >
+                  <div className="text-lg font-bold text-foreground">{stat.value}</div>
+                  <div className="text-xs text-muted-foreground">{stat.label}</div>
                 </div>
-              </a>
+              ))}
             </motion.div>
           </div>
 

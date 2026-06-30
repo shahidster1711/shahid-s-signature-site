@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Section, SectionHeader } from "@/components/ui/Section";
-import { Sparkles, BookOpen, Code, Target } from "lucide-react";
+import { Sparkles, BookOpen, Code, Target, Music2, Fish, Cpu } from "lucide-react";
 
 const nowItems = [
   {
@@ -17,6 +17,21 @@ const nowItems = [
     icon: BookOpen,
     title: "Exploring observability",
     description: "Improving distributed system debugging with better tracing, metrics, and alerting patterns.",
+  },
+];
+
+const beyondWorkItems = [
+  {
+    icon: Music2,
+    label: "DJing & Music Production",
+  },
+  {
+    icon: Fish,
+    label: "Fishing & Outdoor Adventures",
+  },
+  {
+    icon: Cpu,
+    label: "DIY Tech Projects",
   },
 ];
 
@@ -55,16 +70,35 @@ export const Now = () => {
         ))}
       </div>
 
+      {/* Beyond work */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="mt-10 p-6 rounded-xl border border-border/50 bg-card/30"
+      >
+        <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">Beyond the screen</p>
+        <div className="flex flex-wrap gap-4">
+          {beyondWorkItems.map((item) => (
+            <span key={item.label} className="flex items-center gap-2 text-sm text-muted-foreground">
+              <item.icon className="w-4 h-4 text-primary/70 shrink-0" />
+              {item.label}
+            </span>
+          ))}
+        </div>
+      </motion.div>
+
       {/* Last updated */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="mt-8 flex items-center justify-center gap-2 text-sm text-muted-foreground"
+        className="mt-6 flex items-center justify-center gap-2 text-sm text-muted-foreground"
       >
         <Sparkles className="w-4 h-4" />
-        <span>Last updated: January 2026</span>
+        <span>Last updated: June 2026</span>
       </motion.div>
     </Section>
   );
