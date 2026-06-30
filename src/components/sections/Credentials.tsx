@@ -76,9 +76,11 @@ export const Credentials = () => {
                   {cert.status}
                 </span>
               </div>
-              <p className="text-xs text-muted-foreground/60 mt-1 font-mono truncate">
-                ID: {cert.credentialId}
-              </p>
+              {cert.credentialId && (
+                <p className="text-xs text-muted-foreground/60 mt-1 font-mono truncate">
+                  ID: {cert.credentialId}
+                </p>
+              )}
             </div>
           </motion.div>
         ))}

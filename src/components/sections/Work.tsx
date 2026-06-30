@@ -67,7 +67,7 @@ const experiences = [
     current: false,
     description: "Administered SCCM and Windows infrastructure for enterprise clients, maintaining 99% uptime across 100+ user environments.",
     impact: [
-      "Administered SCCM and Windows infrastructure for 100+ users, maintaining 99% uptime",
+      "Managed infrastructure for 100+ users across enterprise Windows environments with SCCM-driven deployment automation",
       "Completed advanced technical training in Linux, Python, PowerShell, networking, and system administration",
       "Ensured adherence to security and document control standards (EDF compliance)",
     ],
