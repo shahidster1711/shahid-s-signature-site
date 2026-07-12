@@ -5,7 +5,7 @@ import { GraduationCap, Shield, Cloud } from "lucide-react";
 const certifications = [
   {
     icon: Cloud,
-    title: "AWS Solutions Architect",
+    title: "AWS Certified Solutions Architect",
     issuer: "Amazon Web Services",
     level: "Associate",
     credentialId: "XZGBNQ6C524E169B",
@@ -21,7 +21,7 @@ const certifications = [
   },
   {
     icon: Shield,
-    title: "Web App Penetration Testing",
+    title: "Web Application Penetration Testing",
     issuer: "Security Certification",
     level: "Professional",
     credentialId: "C-2c43e6116-1d0c451",
@@ -29,7 +29,7 @@ const certifications = [
   },
   {
     icon: Shield,
-    title: "Cyber Security for Business",
+    title: "Introduction to Cyber Security for Business",
     issuer: "Industry Certification",
     level: "Foundational",
     credentialId: "SHQ7RPSR9GTM",
