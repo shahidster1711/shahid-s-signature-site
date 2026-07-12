@@ -12,7 +12,7 @@ const skillCategories = [
   },
   {
     title: "Languages & Tools",
-    skills: ["Python", "Linux", "PowerShell", "Bash", "SCCM", "CloudWatch", "Datadog", "SingleStore Toolbox", "WireShark"],
+    skills: ["Python", "Linux", "PowerShell", "SCCM", "CloudWatch", "Datadog", "Wireshark"],
   },
   {
     title: "Key Competencies",

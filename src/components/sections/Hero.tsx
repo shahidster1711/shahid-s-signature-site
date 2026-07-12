@@ -73,7 +73,7 @@ export const Hero = () => {
                 </span>
               </a>
               <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mt-4">
-                I debug distributed systems, optimize queries at petabyte scale, and help Fortune 500 teams ship reliable data infrastructure.
+                I troubleshoot distributed databases across cloud environments with a focus on incident response, root-cause analysis, and performance tuning.
               </p>
             </motion.div>
 
@@ -165,10 +165,10 @@ export const Hero = () => {
               className="grid grid-cols-2 gap-3 max-w-sm"
             >
               {[
-                { value: "5+ yrs", label: "Enterprise support" },
-                { value: "20+", label: "Engineers trained" },
-                { value: "50+", label: "Global customers" },
-                { value: "25+", label: "KB articles authored" },
+                { value: "5+ yrs", label: "Support experience" },
+                { value: "Tier-2/3", label: "Incident support" },
+                { value: "AWS + Azure", label: "Cloud platforms" },
+                { value: "SQL + NoSQL", label: "Database focus" },
               ].map((stat) => (
                 <div
                   key={stat.label}
