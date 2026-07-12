@@ -4,15 +4,19 @@ import { Section, SectionHeader } from "@/components/ui/Section";
 const skillCategories = [
   {
     title: "Databases",
-    skills: ["SingleStore", "PostgreSQL", "MySQL", "Oracle DB", "MongoDB", "Redis"],
+    skills: ["SingleStore", "PostgreSQL", "MySQL", "Amazon Aurora", "Amazon RDS", "DynamoDB", "SQL", "NoSQL"],
   },
   {
     title: "Cloud & Infrastructure",
-    skills: ["AWS (RDS, EC2, S3)", "Azure SQL", "Google Cloud SQL", "Docker", "Kubernetes", "Terraform"],
+    skills: ["AWS (EC2, RDS, S3, IAM, VPC)", "Microsoft Azure", "SingleStore Helios", "Docker"],
   },
   {
     title: "Languages & Tools",
-    skills: ["Python", "Bash", "SQL", "Linux", "Git", "Grafana", "Prometheus"],
+    skills: ["Python", "Linux", "PowerShell", "SCCM", "CloudWatch", "Datadog", "Wireshark"],
+  },
+  {
+    title: "Key Competencies",
+    skills: ["Incident Management", "Disaster Recovery", "Performance Monitoring", "ITIL Processes", "Technical Troubleshooting", "Infrastructure Support"],
   },
 ];
 
@@ -32,7 +36,7 @@ export const Skills = () => {
         description="The tools and technologies I use to solve problems in production."
       />
 
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
         {skillCategories.map((category, categoryIndex) => (
           <motion.div
             key={category.title}
